@@ -2,7 +2,8 @@ package controller;
 
 import java.util.List;
 
-import model.BlackjackHand;
+import model.Deck;
+import model.Hand;
 import service.BlackjackService;
 import service.BlackjackServiceImpl;
 
@@ -18,6 +19,16 @@ public class BlackjackControllerImpl implements BlackjackController {
 
 	private Integer bet;
 	
+	private Hand hand;
+	
+	public void clearHand() {
+		hand = null;
+	}
+
+	public Hand startNewHand() {
+		hand = new Hand();
+		return hand;
+	}
 	public Integer getBet() {
 		return bet;
 	}
@@ -30,37 +41,34 @@ public class BlackjackControllerImpl implements BlackjackController {
 		this.bet = bet;
 	}
 
-	public BlackjackControllerImpl() {
-		blackJackService = new BlackjackServiceImpl();
+	public BlackjackControllerImpl(Deck deck) {
+		blackJackService = new BlackjackServiceImpl(deck);
 	}
 	
 	@Override
-	public List<Integer> hit() {
-		return blackJackService.hit();
+	public Hand hit() {
+		hand.addCard(blackJackService.hit());
+		return hand;
 	}
 
 	@Override
 	public void stand() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void doubleDown() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<BlackjackHand> split() {
+	public List<Hand> split() {
 		return null;
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public List<Integer> getHandValue() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

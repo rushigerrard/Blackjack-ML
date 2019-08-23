@@ -2,14 +2,20 @@ package service;
 
 import java.util.List;
 
-import model.BlackjackHand;
+import model.Card;
+import model.Deck;
+import model.Hand;
 
 public class BlackjackServiceImpl implements BlackjackService {
 
+	private Deck deck;
 
+	public BlackjackServiceImpl(Deck deck) {
+		this.deck = deck;
+	}
 	@Override
-	public List<Integer> hit() {
-		return null;
+	public Card hit() {
+		return deck.dealCard();
 
 	}
 
@@ -24,7 +30,7 @@ public class BlackjackServiceImpl implements BlackjackService {
 	}
 
 	@Override
-	public List<BlackjackHand> split() {
+	public List<Hand> split() {
 		return null;
 
 	}

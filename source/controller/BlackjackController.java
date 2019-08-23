@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import model.BlackjackHand;
+import model.Hand;
 
 /**
  * The APIs for playing a game of blackjack are defined in this controller.
@@ -13,17 +13,21 @@ import model.BlackjackHand;
  */
 public interface BlackjackController {
 
+	void clearHand();
+
+	Hand startNewHand();
+
 	Integer getBet();
 
 	void setBet(Integer bet);
 
-	List<Integer> hit();
+	Hand hit();
 	
 	void stand();
 
 	void doubleDown();
 
-	List<BlackjackHand> split();
+	List<Hand> split();
 
 	List<Integer> getHandValue();
 }

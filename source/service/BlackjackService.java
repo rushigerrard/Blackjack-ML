@@ -2,7 +2,8 @@ package service;
 
 import java.util.List;
 
-import model.BlackjackHand;
+import model.Card;
+import model.Hand;
 
 /**
  * BlackjackService provides the business logic for processing a user actions
@@ -20,13 +21,13 @@ public interface BlackjackService {
 
 	void setBet(Integer bet);
 
-	List<Integer> hit();
+	Card hit();
 
 	void stand();
 
 	void doubleDown();
 
-	List<BlackjackHand> split();
+	List<Hand> split();
 
 	List<Integer> getHandValue();
 }
