@@ -4,6 +4,7 @@ import controller.BlackjackController;
 import controller.BlackjackControllerImpl;
 import model.BoardState;
 import model.Deck;
+import model.Hand;
 
 /**
  * Dealer agent will use a basic strategy for making a decision
@@ -25,8 +26,16 @@ public class DealerAgent implements BlackjackAgent {
 
 	@Override
 	public int makeADecision(BoardState state) {
-		// TODO Auto-generated method stub
-		return 0;
+		Hand dealerHand = state.getDealerHand();
+		int dealerScore = dealerHand.getBlackjackValue().get(0);
+		state.setDealerScore(dealerScore);
+		if (dealerScore <= 16) {
+			return 0;
+		} else if (dealerScore <= 21) {
+			return 1;
+		} else {
+			return 1;
+		}
 	}
 
 	public DealerAgent(Deck deck) {

@@ -12,5 +12,11 @@ import model.BoardState;
  */
 public interface BlackjackAgent {
 
+	/**
+	 * makeADecision returns 0 - hit 1 - stand 2 - doubleDown 3 - split
+	 * 
+	 * @param state
+	 * @return
+	 */
 	int makeADecision(BoardState state);
 }
