@@ -1,6 +1,9 @@
 package agent;
 
+import java.util.List;
+
 import model.BoardState;
+import model.Hand;
 
 /**
  * BlackjackAgent will have a controller object to play the gamee It will also
@@ -19,4 +22,22 @@ public interface BlackjackAgent {
 	 * @return
 	 */
 	int makeADecision(BoardState state);
+
+	void clearHand();
+
+	Hand startNewHand();
+
+	Integer getBet();
+
+	void setBet(Integer bet);
+
+	Hand hit();
+
+	void stand();
+
+	void doubleDown();
+
+	List<Hand> split();
+
+	List<Integer> getHandValue();
 }

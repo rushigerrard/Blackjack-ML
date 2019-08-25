@@ -1,8 +1,8 @@
 package test;
 
+import agent.BlackjackAgent;
 import agent.DealerAgent;
 import agent.PlayerAgent;
-import controller.BlackjackController;
 import model.BlackjackGame;
 import model.BoardState;
 import model.Hand;
@@ -20,18 +20,15 @@ public class TrialGame {
 		DealerAgent dealerAgent = (DealerAgent) blackJackGame.getDealerAgent();
 		// Step 3 - Set their ML strategy
 		playerAgent.setMlStrategy(new BasicStrategy());
-		// Step 4 - Instantiate the controllers
-		BlackjackController playerController = playerAgent.getController();
-		BlackjackController dealerController = dealerAgent.getController();
 		/**
-		 * Step 5 Dealer and player both draw a card. Ideally both draw 2 cards
+		 * Step 4 Dealer and player both draw a card. Ideally both draw 2 cards
 		 * But one of dealer card is hidden
 		 *
 		 */
-		playerController.startNewHand();
-		dealerController.startNewHand();
-		Hand playerHand = playerController.hit();
-		Hand dealerHand = dealerController.hit();
+		playerAgent.startNewHand();
+		dealerAgent.startNewHand();
+		Hand playerHand = playerAgent.hit();
+		Hand dealerHand = dealerAgent.hit();
 
 		Integer playerScore = playerHand.getBlackjackValue().get(0);
 		Integer dealerScore = dealerHand.getBlackjackValue().get(0);
@@ -45,7 +42,7 @@ public class TrialGame {
 		state.setPlayerScore(playerScore);
 
 		while (playerAgent.makeADecision(state) == 0) {// Let 0 = hit
-			state = playerPlaysARound(playerController, state);
+			state = playerPlaysARound(playerAgent, state);
 		}
 		playerScore = state.getPlayerScore();
 		System.out.println("Player stands at hand value " + playerScore);
@@ -56,11 +53,12 @@ public class TrialGame {
 			playerAgent.incrementEarning();
 		} else if (playerScore > 21) {
 			System.out.println("Player goes BUST.");
+			System.out.println("Dealer wins");
 			playerAgent.decrementEarning();
 		} else {
 			System.out.println("Dealer plays next");
 			while (dealerAgent.makeADecision(state) == 0) {
-				state = dealerPlaysARound(dealerController, state);
+				state = dealerPlaysARound(dealerAgent, state);
 			}
 			dealerScore = state.getDealerScore();
 			System.out.println("Dealer stopped at hand value " + dealerScore);
@@ -77,16 +75,16 @@ public class TrialGame {
 	}
 
 	// TODO : Add action parameter to playARound like doubledown, split or hit
-	private static BoardState playerPlaysARound(BlackjackController playerController, BoardState state) {
-		Hand playerHand = playerController.hit();
+	private static BoardState playerPlaysARound(BlackjackAgent playerAgent, BoardState state) {
+		Hand playerHand = playerAgent.hit();
 		System.out.println("Player hand is :" + playerHand.toString());
 		state.setPlayerHand(playerHand);
 		return state;
 	}
 
 	// TODO : Add action parameter to playARound like doubledown, split or hit
-	private static BoardState dealerPlaysARound(BlackjackController dealerController, BoardState state) {
-		Hand playerHand = dealerController.hit();
+	private static BoardState dealerPlaysARound(BlackjackAgent dealerAgent, BoardState state) {
+		Hand playerHand = dealerAgent.hit();
 		System.out.println("Player hand is :" + playerHand.toString());
 		state.setDealerHand(playerHand);
 		return state;

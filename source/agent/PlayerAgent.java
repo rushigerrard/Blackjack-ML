@@ -1,9 +1,12 @@
 package agent;
 
+import java.util.List;
+
 import controller.BlackjackController;
 import controller.BlackjackControllerImpl;
 import model.BoardState;
 import model.Deck;
+import model.Hand;
 import strategy.MLStrategy;
 
 /**
@@ -43,10 +46,6 @@ public class PlayerAgent implements BlackjackAgent {
 		this.earning = earning;
 	}
 
-	public int getBet() {
-		return bet;
-	}
-
 	public void setBet(int bet) {
 		this.bet = bet;
 	}
@@ -67,5 +66,48 @@ public class PlayerAgent implements BlackjackAgent {
 		earning = earning - bet;
 	}
 
+	@Override
+	public void clearHand() {
+		controller.clearHand();
+	}
 
+	@Override
+	public Hand startNewHand() {
+		return controller.startNewHand();
+	}
+
+	@Override
+	public Integer getBet() {
+		return controller.getBet();
+	}
+
+	@Override
+	public void setBet(Integer bet) {
+		controller.setBet(bet);
+	}
+
+	@Override
+	public Hand hit() {
+		return controller.hit();
+	}
+
+	@Override
+	public void stand() {
+		controller.stand();
+	}
+
+	@Override
+	public void doubleDown() {
+		controller.doubleDown();
+	}
+
+	@Override
+	public List<Hand> split() {
+		return controller.split();
+	}
+
+	@Override
+	public List<Integer> getHandValue() {
+		return controller.getHandValue();
+	}
 }

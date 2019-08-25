@@ -1,5 +1,7 @@
 package agent;
 
+import java.util.List;
+
 import controller.BlackjackController;
 import controller.BlackjackControllerImpl;
 import model.BoardState;
@@ -40,5 +42,50 @@ public class DealerAgent implements BlackjackAgent {
 
 	public DealerAgent(Deck deck) {
 		controller = new BlackjackControllerImpl(deck);
+	}
+
+	@Override
+	public void clearHand() {
+		controller.clearHand();
+	}
+
+	@Override
+	public Hand startNewHand() {
+		return controller.startNewHand();
+	}
+
+	@Override
+	public Integer getBet() {
+		return controller.getBet();
+	}
+
+	@Override
+	public void setBet(Integer bet) {
+		controller.setBet(bet);
+	}
+
+	@Override
+	public Hand hit() {
+		return controller.hit();
+	}
+
+	@Override
+	public void stand() {
+		controller.stand();
+	}
+
+	@Override
+	public void doubleDown() {
+		controller.doubleDown();
+	}
+
+	@Override
+	public List<Hand> split() {
+		return controller.split();
+	}
+
+	@Override
+	public List<Integer> getHandValue() {
+		return controller.getHandValue();
 	}
 }
