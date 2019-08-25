@@ -66,8 +66,7 @@ public class TrialGame {
 			System.out.println("Dealer stopped at hand value " + dealerScore);
 			if (dealerScore > 21) {
 				System.out.println("Dealer goes BUST.");
-			}
-			if (dealerScore < playerScore) {
+			} else if (dealerScore < playerScore) {
 				System.out.println("Player wins");
 				playerAgent.incrementEarning();
 			} else {
