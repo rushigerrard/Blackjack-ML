@@ -5,6 +5,7 @@ import agent.DealerAgent;
 import agent.PlayerAgent;
 import model.BlackjackGame;
 import model.BoardState;
+import model.Decision;
 import model.Hand;
 import strategy.BasicStrategy;
 
@@ -41,7 +42,7 @@ public class TrialGame {
 		state.setPlayerHand(playerHand);
 		state.setPlayerScore(playerScore);
 
-		while (playerAgent.makeADecision(state) == 0) {// Let 0 = hit
+		while (playerAgent.makeADecision(state) == Decision.HIT) {
 			state = playerPlaysARound(playerAgent, state);
 		}
 		playerScore = state.getPlayerScore();
@@ -57,7 +58,7 @@ public class TrialGame {
 			playerAgent.decrementEarning();
 		} else {
 			System.out.println("Dealer plays next");
-			while (dealerAgent.makeADecision(state) == 0) {
+			while (dealerAgent.makeADecision(state) == Decision.HIT) {
 				state = dealerPlaysARound(dealerAgent, state);
 			}
 			dealerScore = state.getDealerScore();

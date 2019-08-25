@@ -5,6 +5,7 @@ import java.util.List;
 import controller.BlackjackController;
 import controller.BlackjackControllerImpl;
 import model.BoardState;
+import model.Decision;
 import model.Deck;
 import model.Hand;
 import strategy.MLStrategy;
@@ -34,7 +35,7 @@ public class PlayerAgent implements BlackjackAgent {
 	}
 
 	@Override
-	public int makeADecision(BoardState state) {
+	public Decision makeADecision(BoardState state) {
 		return mlStrategy.makeADecision(state);
 	}
 

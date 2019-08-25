@@ -3,6 +3,7 @@ package agent;
 import java.util.List;
 
 import model.BoardState;
+import model.Decision;
 import model.Hand;
 
 /**
@@ -15,13 +16,7 @@ import model.Hand;
  */
 public interface BlackjackAgent {
 
-	/**
-	 * makeADecision returns 0 - hit 1 - stand 2 - doubleDown 3 - split
-	 * 
-	 * @param state
-	 * @return
-	 */
-	int makeADecision(BoardState state);
+	Decision makeADecision(BoardState state);
 
 	void clearHand();
 

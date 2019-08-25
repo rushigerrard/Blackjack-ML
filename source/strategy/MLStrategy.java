@@ -1,6 +1,7 @@
 package strategy;
 
 import model.BoardState;
+import model.Decision;
 
 /**
  * Have a functional interface to implement various ML strategies
@@ -10,5 +11,5 @@ import model.BoardState;
  */
 public interface MLStrategy {
 
-	int makeADecision(BoardState state);
+	Decision makeADecision(BoardState state);
 }

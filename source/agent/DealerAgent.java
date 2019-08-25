@@ -5,6 +5,7 @@ import java.util.List;
 import controller.BlackjackController;
 import controller.BlackjackControllerImpl;
 import model.BoardState;
+import model.Decision;
 import model.Deck;
 import model.Hand;
 
@@ -27,17 +28,14 @@ public class DealerAgent implements BlackjackAgent {
 	private BlackjackController controller;
 
 	@Override
-	public int makeADecision(BoardState state) {
+	public Decision makeADecision(BoardState state) {
 		Hand dealerHand = state.getDealerHand();
 		int dealerScore = dealerHand.getBlackjackValue().get(0);
 		state.setDealerScore(dealerScore);
 		if (dealerScore <= 16) {
-			return 0;
-		} else if (dealerScore <= 21) {
-			return 1;
-		} else {
-			return 1;
+			return Decision.HIT;
 		}
+		return Decision.STAND;
 	}
 
 	public DealerAgent(Deck deck) {
