@@ -2,7 +2,6 @@ package service;
 
 import java.util.List;
 
-import model.Card;
 import model.Hand;
 
 /**
@@ -21,7 +20,7 @@ public interface BlackjackService {
 
 	void setBet(Integer bet);
 
-	Card hit();
+	Hand hit();
 
 	void stand();
 
@@ -30,4 +29,12 @@ public interface BlackjackService {
 	List<Hand> split();
 
 	List<Integer> getHandValue();
+
+	void shuffle();
+
+	void clearHand();
+
+	Hand startNewHand();
+
+	boolean isDeckShort();
 }

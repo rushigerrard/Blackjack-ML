@@ -18,7 +18,7 @@ import strategy.MLStrategy;
  */
 public class PlayerAgent implements BlackjackAgent {
 
-	private int earning = 1000000;
+	private int earning = 0;
 
 	private int bet = 100;
 

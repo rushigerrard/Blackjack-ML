@@ -21,64 +21,80 @@ public class TrialGame {
 		DealerAgent dealerAgent = (DealerAgent) blackJackGame.getDealerAgent();
 		// Step 3 - Set their ML strategy
 		playerAgent.setMlStrategy(new BasicStrategy());
-		/**
-		 * Step 4 Dealer and player both draw a card. Ideally both draw 2 cards
-		 * But one of dealer card is hidden
-		 *
-		 */
-		playerAgent.startNewHand();
-		dealerAgent.startNewHand();
-		Hand playerHand = playerAgent.hit();
-		Hand dealerHand = dealerAgent.hit();
 
-		Integer playerScore = playerHand.getBlackjackValue().get(0);
-		Integer dealerScore = dealerHand.getBlackjackValue().get(0);
-		/**
-		 * Step 6 Player keeps on playing based on the ML engine output
-		 */
-		BoardState state = new BoardState();
-		state.setDealerHand(dealerHand);
-		state.setDealerScore(dealerScore);
-		state.setPlayerHand(playerHand);
-		state.setPlayerScore(playerScore);
+		int round = 0;
+		while (round < 10) {
+			round++;
+			/**
+			 * Step 4 Dealer and player both draw a card. Ideally both draw 2
+			 * cards But one of dealer card is hidden
+			 *
+			 */
+			playerAgent.startNewHand();
+			dealerAgent.startNewHand();
+			Hand playerHand = playerAgent.hit();
+			Hand dealerHand = dealerAgent.hit();
 
-		while (playerAgent.makeADecision(state) == Decision.HIT) {
-			state = playerPlaysARound(playerAgent, state);
-		}
-		playerScore = state.getPlayerScore();
-		System.out.println("Player stands at hand value " + playerScore);
-		// Step 7 - Check if a player has hit blackjack
-		// TODO : Perfect blackjack only with 2 cards? Please check.
-		if (playerScore == 21) {
-			System.out.println("BLACKJACK! Player wins.");
-			playerAgent.incrementEarning();
-		} else if (playerScore > 21) {
-			System.out.println("Player goes BUST.");
-			System.out.println("Dealer wins");
-			playerAgent.decrementEarning();
-		} else {
-			System.out.println("Dealer plays next");
-			while (dealerAgent.makeADecision(state) == Decision.HIT) {
-				state = dealerPlaysARound(dealerAgent, state);
+			Integer playerScore = playerHand.getBlackjackValue().get(0);
+			Integer dealerScore = dealerHand.getBlackjackValue().get(0);
+			/**
+			 * Step 6 Player keeps on playing based on the ML engine output
+			 */
+
+			BoardState state = new BoardState();
+			state.setDealerHand(dealerHand);
+			state.setDealerScore(dealerScore);
+			state.setPlayerHand(playerHand);
+			state.setPlayerScore(playerScore);
+
+			while (playerAgent.makeADecision(state) == Decision.HIT) {
+				state = playerPlaysARound(playerAgent, state);
 			}
-			dealerScore = state.getDealerScore();
-			System.out.println("Dealer stopped at hand value " + dealerScore);
-			if (dealerScore > 21) {
-				System.out.println("Dealer goes BUST.");
-			} else if (dealerScore < playerScore) {
-				System.out.println("Player wins");
+			playerScore = state.getPlayerScore();
+			// System.out.println("Player stands at hand value " + playerScore);
+			// Step 7 - Check if a player has hit blackjack
+			// TODO : Perfect blackjack only with 2 cards? Please check.
+			if (playerScore == 21) {
+				// System.out.println("BLACKJACK! Player wins.");
 				playerAgent.incrementEarning();
-			} else {
+			} else if (playerScore > 21) {
+				// System.out.println("Player goes BUST.");
 				System.out.println("Dealer wins");
 				playerAgent.decrementEarning();
+			} else {
+				// System.out.println("Dealer plays next");
+				while (dealerAgent.makeADecision(state) == Decision.HIT) {
+					state = dealerPlaysARound(dealerAgent, state);
+				}
+				dealerScore = state.getDealerScore();
+				// System.out.println("Dealer stopped at hand value " +
+				// dealerScore);
+				if (dealerScore > 21) {
+					// System.out.println("Dealer goes BUST.");
+					System.out.println("Player wins");
+					playerAgent.incrementEarning();
+				} else if (dealerScore < playerScore) {
+					System.out.println("Player wins");
+					playerAgent.incrementEarning();
+				} else if (dealerScore == playerScore) {
+					System.out.println("Player and dealer score matches. It's a push. A tie.");
+				} else {
+					System.out.println("Dealer wins");
+					playerAgent.decrementEarning();
+				}
 			}
+			playerAgent.clearHand();
+			dealerAgent.clearHand();
+
+			System.out.println("Round " + round + " Player earning " + playerAgent.getEarning());
+			System.out.println("Cards left " + blackJackGame.getDeck().cardsLeft());
 		}
 	}
 
 	// TODO : Add action parameter to playARound like doubledown, split or hit
 	private static BoardState playerPlaysARound(BlackjackAgent playerAgent, BoardState state) {
 		Hand playerHand = playerAgent.hit();
-		System.out.println("Player hand is :" + playerHand.toString());
+		// System.out.println("Player hand is :" + playerHand.toString());
 		state.setPlayerHand(playerHand);
 		return state;
 	}
@@ -86,7 +102,7 @@ public class TrialGame {
 	// TODO : Add action parameter to playARound like doubledown, split or hit
 	private static BoardState dealerPlaysARound(BlackjackAgent dealerAgent, BoardState state) {
 		Hand playerHand = dealerAgent.hit();
-		System.out.println("Player hand is :" + playerHand.toString());
+		// System.out.println("Player hand is :" + playerHand.toString());
 		state.setDealerHand(playerHand);
 		return state;
 	}

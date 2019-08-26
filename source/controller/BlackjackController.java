@@ -30,4 +30,8 @@ public interface BlackjackController {
 	List<Hand> split();
 
 	List<Integer> getHandValue();
+
+	void shuffle();
+
+	boolean isDeckShort();
 }

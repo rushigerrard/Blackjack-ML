@@ -44,6 +44,13 @@ public class DealerAgent implements BlackjackAgent {
 
 	@Override
 	public void clearHand() {
+		// During clearHand phase,
+		// If more than 75% cards have been dealt,
+		// Then shuffle the deck
+		if (controller.isDeckShort()) {
+			System.out.println("We're shortdecked. Let's shuffle the entire deck.");
+			shuffle();
+		}
 		controller.clearHand();
 	}
 
@@ -85,5 +92,9 @@ public class DealerAgent implements BlackjackAgent {
 	@Override
 	public List<Integer> getHandValue() {
 		return controller.getHandValue();
+	}
+
+	private void shuffle() {
+		controller.shuffle();
 	}
 }

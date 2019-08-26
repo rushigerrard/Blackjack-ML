@@ -17,29 +17,18 @@ public class BlackjackControllerImpl implements BlackjackController {
 
 	private BlackjackService blackJackService;
 
-	private Integer bet;
+	// private Integer bet;
 	
-	private Hand hand;
+	// private Hand hand;
 	
 	public void clearHand() {
-		hand = null;
+		blackJackService.clearHand();
 	}
 
 	public Hand startNewHand() {
-		hand = new Hand();
-		return hand;
-	}
-	public Integer getBet() {
-		return bet;
+		return blackJackService.startNewHand();
 	}
 
-	public void setBet(Integer bet) {
-		this.bet = bet;
-	}
-
-	BlackjackControllerImpl(Integer bet) {
-		this.bet = bet;
-	}
 
 	public BlackjackControllerImpl(Deck deck) {
 		blackJackService = new BlackjackServiceImpl(deck);
@@ -47,8 +36,7 @@ public class BlackjackControllerImpl implements BlackjackController {
 	
 	@Override
 	public Hand hit() {
-		hand.addCard(blackJackService.hit());
-		return hand;
+		return blackJackService.hit();
 	}
 
 	@Override
@@ -70,6 +58,27 @@ public class BlackjackControllerImpl implements BlackjackController {
 	@Override
 	public List<Integer> getHandValue() {
 		return null;
+	}
+
+	@Override
+	public void shuffle() {
+		blackJackService.shuffle();
+	}
+
+	@Override
+	public Integer getBet() {
+
+		return null;
+	}
+
+	@Override
+	public void setBet(Integer bet) {
+
+	}
+
+	@Override
+	public boolean isDeckShort() {
+		return blackJackService.isDeckShort();
 	}
 
 }
