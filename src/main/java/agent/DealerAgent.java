@@ -30,9 +30,13 @@ public class DealerAgent implements BlackjackAgent {
 	@Override
 	public Decision makeADecision(BoardState state) {
 		Hand dealerHand = state.getDealerHand();
-		int dealerScore = dealerHand.getBlackjackValue().get(0);
-		state.setDealerScore(dealerScore);
-		if (dealerScore <= 16) {
+		List<Integer> dealerScoreList = dealerHand.getBlackjackValue();
+		Integer softDealerScore = dealerScoreList.get(0);
+		if (dealerScoreList.size() > 1) {
+			Integer hardDealerScore = dealerScoreList.get(1);
+		}
+		state.setDealerScore(dealerScoreList);
+		if (softDealerScore <= 16) {
 			return Decision.HIT;
 		}
 		return Decision.STAND;

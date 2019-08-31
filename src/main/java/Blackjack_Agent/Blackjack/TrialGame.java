@@ -1,4 +1,4 @@
-package test;
+package Blackjack_Agent.Blackjack;
 
 import agent.BlackjackAgent;
 import agent.DealerAgent;
@@ -43,14 +43,13 @@ public class TrialGame {
 
 			BoardState state = new BoardState();
 			state.setDealerHand(dealerHand);
-			state.setDealerScore(dealerScore);
 			state.setPlayerHand(playerHand);
-			state.setPlayerScore(playerScore);
+			state.setPlayerScore(playerHand.getBlackjackValue());
 
 			while (playerAgent.makeADecision(state) == Decision.HIT) {
 				state = playerPlaysARound(playerAgent, state);
 			}
-			playerScore = state.getPlayerScore();
+			playerScore = state.getPlayerScore().get(0);
 			// System.out.println("Player stands at hand value " + playerScore);
 			// Step 7 - Check if a player has hit blackjack
 			// TODO : Perfect blackjack only with 2 cards? Please check.
@@ -66,7 +65,7 @@ public class TrialGame {
 				while (dealerAgent.makeADecision(state) == Decision.HIT) {
 					state = dealerPlaysARound(dealerAgent, state);
 				}
-				dealerScore = state.getDealerScore();
+				dealerScore = state.getDealerScore().get(0);
 				// System.out.println("Dealer stopped at hand value " +
 				// dealerScore);
 				if (dealerScore > 21) {

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * BoardState gives the current state of a blackjack board The blackjack game
  * 
@@ -16,12 +18,12 @@ public class BoardState {
 		this.dealerHand = dealerHand;
 	}
 
-	public int getDealerScore() {
-		return dealerScore;
+	public List<Integer> getDealerScore() {
+		return dealerScoreList;
 	}
 
-	public void setDealerScore(int dealerScore) {
-		this.dealerScore = dealerScore;
+	public void setDealerScore(List<Integer> dealerScoreList) {
+		this.dealerScoreList = dealerScoreList;
 	}
 
 	public Hand getPlayerHand() {
@@ -32,20 +34,20 @@ public class BoardState {
 		this.playerHand = playerHand;
 	}
 
-	public int getPlayerScore() {
-		return playerScore;
+	public List<Integer> getPlayerScore() {
+		return playerScoreList;
 	}
 
-	public void setPlayerScore(int playerScore) {
-		this.playerScore = playerScore;
+	public void setPlayerScore(List<Integer> playerScoreList) {
+		this.playerScoreList = playerScoreList;
 	}
 
 	private Hand dealerHand;
 
-	private int dealerScore;
+	private List<Integer> dealerScoreList;
 
 	private Hand playerHand;
 
-	private int playerScore;
+	private List<Integer> playerScoreList;
 
 }
