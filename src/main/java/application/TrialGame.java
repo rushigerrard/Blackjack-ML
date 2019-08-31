@@ -22,8 +22,9 @@ public class TrialGame {
 		// Step 3 - Set their ML strategy
 		playerAgent.setMlStrategy(new BasicStrategy());
 
+		int totalRounds = Integer.parseInt(args[0]);
 		int round = 0;
-		while (round < 10) {
+		while (round < totalRounds) {
 			round++;
 			/**
 			 * Step 4 Dealer and player both draw a card. Ideally both draw 2
