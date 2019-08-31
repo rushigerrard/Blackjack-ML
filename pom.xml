@@ -34,8 +34,8 @@
       <target>1.8</target>
     </configuration>
   </plugin>
-  <plugin>
-      <!-- Build an executable JAR -->
+  <!-- <plugin>
+      Build an executable JAR
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-jar-plugin</artifactId>
       <version>3.1.0</version>
@@ -48,7 +48,44 @@
           </manifest>
         </archive>
       </configuration>
-    </plugin>
+    </plugin> -->
+    <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-shade-plugin</artifactId>
+  <version>2.4.1</version>
+  <executions>
+    <execution>
+      <id>build-first</id>
+      <phase>package</phase>
+      <goals>
+         <goal>shade</goal>
+      </goals>   
+      <configuration>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
+            <mainClass>application.MonitorBoardState</mainClass>
+          </transformer>
+        </transformers>
+        <finalName>MonitorBoardState</finalName>
+      </configuration>        
+    </execution>
+    <execution>
+      <id>build-second</id>
+      <phase>package</phase>
+      <goals>
+         <goal>shade</goal>
+      </goals>   
+      <configuration>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
+            <mainClass>application.TrialGame</mainClass>
+          </transformer>
+        </transformers>
+        <finalName>TrialGameBasicStrategy</finalName>
+      </configuration>  
+    </execution>
+  </executions>
+</plugin>
 </plugins>
 </build>
 </project>
