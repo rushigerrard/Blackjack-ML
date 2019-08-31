@@ -22,7 +22,11 @@ public class TrialGame {
 		// Step 3 - Set their ML strategy
 		playerAgent.setMlStrategy(new BasicStrategy());
 
-		int totalRounds = Integer.parseInt(args[0]);
+		int totalRounds = 10;
+		if (args.length > 0) {
+			totalRounds = Integer.parseInt(args[0]);
+		}
+
 		int round = 0;
 		while (round < totalRounds) {
 			round++;
