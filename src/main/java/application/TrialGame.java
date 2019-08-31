@@ -1,4 +1,4 @@
-package Blackjack_Agent.Blackjack;
+package application;
 
 import agent.BlackjackAgent;
 import agent.DealerAgent;

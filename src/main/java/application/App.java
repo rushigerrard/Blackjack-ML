@@ -1,4 +1,4 @@
-package Blackjack_Agent.Blackjack;
+package application;
 
 /**
  * Hello world!

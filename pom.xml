@@ -44,7 +44,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>Blackjack_Agent.Blackjack.TrialGame</mainClass>
+            <mainClass>application.TrialGame</mainClass>
           </manifest>
         </archive>
       </configuration>
