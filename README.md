@@ -17,7 +17,7 @@ $ mvn clean install
 
 Run:
 
-$ java -jar .\target\TrialGameBasicStrategy.jar <no-of-rounds-of-game>
+$ java -jar .\target\TrialGameBasicStrategy.jar no-of-rounds-of-game
 
-If <no-of-rounds> not specified, by default it will be 10.
+If no-of-rounds not specified, by default it will be 10.
 
