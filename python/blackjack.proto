@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+enum Suit {
+    SPADES = 0;
+    HEARTS = 1;
+    DIAMONDS = 2;
+    CLUBS = 3;
+}
+
+message Card {
+    Suit suit = 1;
+    int32 value = 2;
+}
+
+message Hand {
+    repeated Card hand = 1;
+}
+
+message BoardState {
+    Hand dealerHand = 1;
+    repeated int32 dealerScoreList = 2;
+    Hand playerHand = 3;
+    repeated int32 playerScoreList = 4;
+}
+
+
+message MLDecision {
+    enum Decision {
+        HIT = 0;
+        STAND = 1;
+        DOUBLDOWN = 2;
+        SPLIT = 3;
+        OTHER = 4;
+    }
+    Decision decision = 1;
+}
+
+service BlackjackService {
+    rpc makeADecision (BoardState) returns (MLDecision) {};
+	rpc GetDigestor(DigestMessage) returns (DigestedMessage) {};
+}
+
+message DigestMessage{
+    string ToDigest = 1;
+}
+
+message DigestedMessage{
+    string Digested = 1;
+    bool WasDigested = 2;
+}
