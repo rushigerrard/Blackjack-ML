@@ -34,7 +34,7 @@ class BlackjackServiceServicer(blackjack_pb2_grpc.BlackjackServiceServicer):
 
         return blackjack_pb2.DigestedMessage(**result)
 		
-    def makeADecision(self, boardState, context):
+    def makeADecision(self, decision, context):
         """
         Implementation of the rpc GetDigest declared in the proto
         file above.
@@ -54,13 +54,13 @@ class BlackjackServiceServicer(blackjack_pb2_grpc.BlackjackServiceServicer):
         """
         # declare a server object with desired number
         # of thread pool workers.
-        blackjack_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        blackjack_server = grpc.server(futures.ThreadPoolExecutor(max_workers = 10))
  
         # This line can be ignored
-        blackjack_pb2_grpc.add_BlackjackServiceServicer_to_server(BlackjackServiceServicer(),blackjack_server)
+        blackjack_pb2_grpc.add_BlackjackServiceServicer_to_server(BlackjackServiceServicer(), blackjack_server)
  
         # bind the server to the port defined above
-        blackjack_server.add_insecure_port('[::]:{}'.format(self.server_port))
+        blackjack_server.add_insecure_port(f'[::]:{self.server_port}')
  
         # start the server
         blackjack_server.start()
@@ -73,7 +73,7 @@ class BlackjackServiceServicer(blackjack_pb2_grpc.BlackjackServiceServicer):
             while True:
                 time.sleep(60*60*60)
         except KeyboardInterrupt:
-            digestor_server.stop(0)
+            blackjack_server.stop(0)
             print('Blackjack Server Stopped ...')
  
 curr_server = BlackjackServiceServicer()
