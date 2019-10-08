@@ -1,26 +1,23 @@
 # Blackjack-ML
 Building a blackjack game with agents playing against the dealer using varied ML strategies
 
+## Prerequisites
+- Java 1.8
+- Maven 3.6.1
 
-Prerequisite:
+## Installation
+Blackjack-Agent is a standard Maven project.
 
-Java 1.8
-Maven 3.6.1
+`$ mvn clean install`
 
-Installation:
+2 executable jars - `MonitorBoardState.jar` and `TrialGameBasicStrategy.jar` would be generated in the `target` folder.
 
-Blackjack-Agent is a standard maven project.
-$ mvn clean install
+## Execution
+`$ java -jar .\target\TrialGameBasicStrategy.jar <no-of-rounds-of-game>`
 
+If `no-of-rounds` not specified, by default it will be 10.
 
-2 executable jars - MonitorBoardState.jar and TrialGameBasicStrategy.jar would be generated in the target folder.
+## gRPC
+To compile the gRPC `.proto` file and generate the stub classes, run the following command from the `python` directory.
 
-Run:
-
-$ java -jar .\target\TrialGameBasicStrategy.jar no-of-rounds-of-game
-
-If no-of-rounds not specified, by default it will be 10.
-
-To compile the gRPC .proto file and generate the stub classes, run the following command from the `python` directory.
-`python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. blackjack.proto`
-
+`$ python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. blackjack.proto`

@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>Blackjack-Agent</groupId>
@@ -22,27 +21,27 @@
       <scope>test</scope>
     </dependency>
 
-  <!-- https://mvnrepository.com/artifact/org.python/jython-standalone -->
-  <dependency>
-    <groupId>org.python</groupId>
-    <artifactId>jython-standalone</artifactId>
-    <version>2.7.1</version>
-  </dependency>
+    <!-- https://mvnrepository.com/artifact/org.python/jython-standalone -->
+    <dependency>
+      <groupId>org.python</groupId>
+      <artifactId>jython-standalone</artifactId>
+      <version>2.7.1</version>
+    </dependency>
 
   </dependencies>
-  
+
   <build>
-<plugins>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.6.1</version> <!-- or whatever current version -->
-    <configuration>
-      <source>1.8</source>
-      <target>1.8</target>
-    </configuration>
-  </plugin>
-  <!-- <plugin>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version> <!-- or whatever current version -->
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <!-- <plugin>
       Build an executable JAR
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-jar-plugin</artifactId>
@@ -57,43 +56,58 @@
         </archive>
       </configuration>
     </plugin> -->
-    <plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-shade-plugin</artifactId>
-  <version>2.4.1</version>
-  <executions>
-    <execution>
-      <id>build-first</id>
-      <phase>package</phase>
-      <goals>
-         <goal>shade</goal>
-      </goals>   
-      <configuration>
-        <transformers>
-          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
-            <mainClass>application.MonitorBoardState</mainClass>
-          </transformer>
-        </transformers>
-        <finalName>MonitorBoardState</finalName>
-      </configuration>        
-    </execution>
-    <execution>
-      <id>build-second</id>
-      <phase>package</phase>
-      <goals>
-         <goal>shade</goal>
-      </goals>   
-      <configuration>
-        <transformers>
-          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
-            <mainClass>application.TrialGame</mainClass>
-          </transformer>
-        </transformers>
-        <finalName>TrialGameBasicStrategy</finalName>
-      </configuration>  
-    </execution>
-  </executions>
-</plugin>
-</plugins>
-</build>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.1</version>
+        <executions>
+          <execution>
+            <id>build-first</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>application.MonitorBoardState</mainClass>
+                </transformer>
+              </transformers>
+              <finalName>MonitorBoardState</finalName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>build-second</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>application.TrialGame</mainClass>
+                </transformer>
+              </transformers>
+              <finalName>TrialGameBasicStrategy</finalName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>build-third</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>application.TrialGame_Random</mainClass>
+                </transformer>
+              </transformers>
+              <finalName>TrialGameRandomStrategy</finalName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

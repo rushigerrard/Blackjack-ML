@@ -4,3 +4,4 @@ bin/
 .classpath
 python/__pycache__/
 .vscode/
+*.class
