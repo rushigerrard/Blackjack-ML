@@ -24,9 +24,8 @@ public class JythonObjectFactory {
    public Object createObject(Object interfaceType, String moduleName){
        Object javaInt = null;
        PythonInterpreter interpreter = new PythonInterpreter();
-       interpreter.exec("import sys");
-       interpreter.exec("sys.path.append('/home/akrish13/repos/Blackjack-ML/src/main/java/strategy')");
-       interpreter.exec("print(sys.path)");
+       interpreter.exec("import os, sys");
+       interpreter.exec("sys.path.append(os.path.join(os.getcwd(), 'src', 'main', 'java', 'strategy'))");
        interpreter.exec("from " + moduleName + " import " + moduleName);
 
        pyObject = interpreter.get(moduleName);
